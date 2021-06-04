@@ -1,5 +1,5 @@
 <template>
-  <div class="post-page">
+  <div class="posts-page">
     <div class="post-page__header"></div>
   </div>
 </template>
@@ -11,8 +11,10 @@
 </script>
 
 <style lang="scss" scoped>
-.post-page{
-  min-height: 20px;
+.posts-page{
+  display: flex;
+  justify-content: center;
+  align-items: center;
   &__header{
     min-height: 20px;
     background-color: antiquewhite;
