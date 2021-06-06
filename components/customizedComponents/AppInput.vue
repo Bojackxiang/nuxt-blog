@@ -1,5 +1,6 @@
 <template>
   <div class="input-wrapper">
+    <label><slot /></label>
     <input
       type="text"
       v-bind="$attrs"
@@ -19,14 +20,12 @@ export default {
       inputValue: "",
     };
   },
-  mounted() {
-    this.inputValue = this.value;
-  },
   methods: {
     onInputChange(e) {
       // REVIEW 下面的 这个 input 是不能变的
       this.$emit("input", e.target.value);
     },
+    
   },
 };
 </script>
