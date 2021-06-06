@@ -9,14 +9,17 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
+    "axios": "^0.21.1",
     "core-js": "^3.9.1",
     "element-ui": "^2.15.1",
-    "nuxt": "^2.15.3"
+    "moment": "^2.29.1",
+    "nuxt": "^2.15.3",
+    "vue-axios": "^3.2.4"
   },
   "devDependencies": {
     "@nuxtjs/style-resources": "^1.1.0",
     "node-sass": "^6.0.0",
     "sass": "^1.34.1",
-    "sass-loader": "^10"
+    "sass-loader": "^10.2.0"
   }
 }
