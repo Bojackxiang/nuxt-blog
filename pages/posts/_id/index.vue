@@ -6,35 +6,34 @@
         {{ title }}
       </div>
       <div class="post-page__content">
-        {{content}}
+        {{ content }}
       </div>
       <div class="post-page__createAt">
-        {{createdAt}}
+        {{ createdAt }}
       </div>
       <div class="post-page__error" v-show="Boolean(error)">
-        {{error}}
+        {{ error }}
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import axios from 'axios'
+import axios from "axios";
 export default {
   data() {
     // NOTE 使用 data 来做初始数据的展示
     return {
       postId: this.$route.params.id,
-      content: '', 
-      title: '', 
-      createdAt: '',
-      error: ''
+      content: "",
+      title: "",
+      createdAt: "",
+      error: "",
     };
   },
   async asyncData(context) {
-    // NOTE 如果在这边直接 throw，会直接进入到 error page 
+    // NOTE 如果在这边直接 throw，会直接进入到 error page
     try {
-      
       const response = await axios.get(
         "https://jsonplaceholder.typicode.com/todos/1"
       );
@@ -49,9 +48,19 @@ export default {
       return { error: error.message };
     }
   },
-  mounted() {
-    console.log("mounted ....");
-    
+  created() {
+    const post = {
+      postId: this.postId,
+      content: this.content,
+      title: this.title,
+      createdAt: this.createdAt,
+    };
+
+    this.$store.commit("setPosts", [
+      {
+        ...post,
+      },
+    ]);
   },
 };
 </script>
@@ -63,7 +72,7 @@ export default {
   height: 100px;
   &__content {
   }
-  &__error{
+  &__error {
     color: red;
   }
 }
