@@ -28,14 +28,7 @@ export default {
   props: {
     title: { type: String, required: true },
     content: { type: String, required: false },
-    createAt: { type: Date, required: true },
-  },
-  data() {
-    return {
-      title: "",
-      content: "",
-      createdAt: "",
-    };
+    createAt: { type: String, required: true },
   },
   computed: {
     formatedDate: () => moment(new Date()).format("YYYY/MM/DD"),
