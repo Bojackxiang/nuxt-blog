@@ -11,6 +11,9 @@
       <div class="post-page__createAt">
         {{createdAt}}
       </div>
+      <div class="post-page__error" v-show="Boolean(error)">
+        {{error}}
+      </div>
     </div>
   </div>
 </template>
@@ -19,15 +22,19 @@
 import axios from 'axios'
 export default {
   data() {
+    // NOTE 使用 data 来做初始数据的展示
     return {
       postId: this.$route.params.id,
       content: '', 
       title: '', 
-      createdAt: ''
+      createdAt: '',
+      error: ''
     };
   },
   async asyncData(context) {
+    // NOTE 如果在这边直接 throw，会直接进入到 error page 
     try {
+      
       const response = await axios.get(
         "https://jsonplaceholder.typicode.com/todos/1"
       );
@@ -39,7 +46,6 @@ export default {
         createdAt: new Date().toString(),
       };
     } catch (error) {
-      console.log(error);
       return { error: error.message };
     }
   },
@@ -56,6 +62,9 @@ export default {
   // background-color: $color_1;
   height: 100px;
   &__content {
+  }
+  &__error{
+    color: red;
   }
 }
 </style>
