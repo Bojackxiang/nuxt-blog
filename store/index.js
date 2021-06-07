@@ -1,5 +1,4 @@
 import Vuex from 'vuex'
-import axios from 'axios'
 
 const initialState = {
   posts: [],
@@ -13,22 +12,21 @@ const createStore = () => {
     state: initialState,
     actions: {
       async nuxtServerInit({commit}, {req}){
+        console.log(req.session);
         // REVIEW 这个是一定会被 updated 的
         console.log('nuxtServerInit'.toUpperCase());
-        const response = await axios.get(
+        const response = await this.$axios.get(
           "https://jsonplaceholder.typicode.com/todos/1"
         );
 
         const {data} = response; 
-        console.log(data);
+        
         const post = {
           postId: data.id,
           content: data.title,
           title: data.title,
           createdAt: new Date().toString(),
         };
-
-        console.log({post});
 
         commit('setPosts', [post])
 
