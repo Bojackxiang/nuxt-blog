@@ -54,7 +54,8 @@ export default {
         createdAt: this.createdAt,
       };
 
-      this.$store.commit("setPosts", [post]);
+      // NOTE 现在转移到 store 里面 commit
+      // this.$store.commit("setPosts", [post]);
     } catch (error) {
       return { error: error.message };
     }
