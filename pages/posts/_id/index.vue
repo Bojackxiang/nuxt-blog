@@ -32,34 +32,7 @@ export default {
       error: "",
     };
   },
-  async fetch() {
-    // NOTE 如果在这边直接 throw，会直接进入到 error page
-    // NOTE fetch 里面是可以使用 this 的
-    // 这是和 asyncdata 最不同的地方
-    try {
-      const response = await axios.get(
-        "https://jsonplaceholder.typicode.com/todos/1"
-      );
-      const { data } = response;
-
-      this.content = "post content";
-      this.title = data.title;
-      this.createdAt = new Date().toString();
-
-      // 因为能够 access this，所以可以直接 dispatch
-      const post = {
-        postId: this.postId,
-        content: this.content,
-        title: this.title,
-        createdAt: this.createdAt,
-      };
-
-      // NOTE 现在转移到 store 里面 commit
-      // this.$store.commit("setPosts", [post]);
-    } catch (error) {
-      return { error: error.message };
-    }
-  },
+ 
   computed: {
     retrivedPost() {
       return this.$store.getters.post;
