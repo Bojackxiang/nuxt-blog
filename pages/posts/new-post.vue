@@ -6,14 +6,21 @@
 </template>
 
 <script>
+import { delayRequest } from '../../utils/formUtils';
 export default {
   methods: {
-    createNewPost() {
-      this.$axios.post("https://jsonplaceholder.typicode.com/posts", {
-        title: "foo",
-        body: "bar",
-        userId: 1,
-      });
+    async createNewPost() {
+      // REVIEW 由此可见，commit 是一个 sync 的方法
+      this.$store.dispatch('TOGGLE_LOADING')
+
+      await delayRequest(
+        'https://jsonplaceholder.typicode.com/posts', 
+        5000, 
+        this.$axios
+      )
+      
+      this.$store.dispatch('TOGGLE_LOADING')
+      
     },
   },
 };
@@ -21,3 +28,4 @@ export default {
 
 <style lang="scss" scoped>
 </style>
+
