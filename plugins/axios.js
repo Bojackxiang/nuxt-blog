@@ -3,19 +3,18 @@ export default function (context) {
   // store，什么的，redirect 都能够拿到
 
   context.$axios.onRequest(config => {
-    console.log('Making request to ' + config.url)
+    console.log('拦截器, REQUEST');
+    console.log({config})
   })
 
   context.$axios.onResponse(response => {
+    console.log('拦截器, RESPONSE');
+    // NOTE  这边是没有办法控制 是不是 return 的
 
-    console.log('ON_RESPONSE', context);
-
-    const data = response.data
-
-    return null
   })
 
   context.$axios.onError(error => {
+    console.log('拦截器, ERROR');
     const code = parseInt(error.response && error.response.status)
     if (code === 400) {
       context.redirect('/400')
