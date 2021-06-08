@@ -4,13 +4,11 @@ export default function (context) {
 
   context.$axios.onRequest(config => {
     console.log('拦截器, REQUEST');
-    console.log({config})
   })
 
   context.$axios.onResponse(response => {
     console.log('拦截器, RESPONSE');
     // NOTE  这边是没有办法控制 是不是 return 的
-
   })
 
   context.$axios.onError(error => {
