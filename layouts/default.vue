@@ -1,17 +1,26 @@
 <template>
   <div>
-    <!-- <Header/> -->
+    <Header />
+    <loading v-if="loadingDisplay"/>
+
     <Nuxt />
   </div>
 </template>
 
 <script>
-import Header from '../components/Header'
+import Header from "../components/Header";
+import Loading from "../components/customizedComponents/AppLoading.vue";
 export default {
   components: {
-    Header
-  }
-}
+    Header,
+    Loading,
+  },
+  computed: {
+    loadingDisplay() {
+      return this.$store.state.loading;
+    },
+  },
+};
 </script>
 
 <style>
