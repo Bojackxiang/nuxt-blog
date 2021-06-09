@@ -13,8 +13,6 @@
 </template>
 
 <script>
-import AppInput from "../../components/customizedComponents/AppInput.vue";
-import AppButton from "../../components/customizedComponents/AppButton.vue";
 import { formClean } from "../../utils/formUtils";
 export default {
   components: {
