@@ -1,12 +1,13 @@
 import axios from 'axios'
 import Vuex, { createLogger } from 'vuex'
+import { delayRequest } from '../utils/formUtils'
 
 const initialState = {
   posts: [],
   loading: false,
 }
 
-console.log('🚀 DEVELOPMENT MODE: ',process.env.development);
+console.log('🚀 DEVELOPMENT MODE: ', process.env.development);
 const createStore = () => {
 
   return new Vuex.Store({
@@ -57,20 +58,6 @@ const createStore = () => {
     plugins: [
       process.env.development === 'DEV' ? createLogger() : null,
     ]
-  })
-}
-
-const delayRequest = (link, time) => {
-  return new Promise((resolve, reject) => {
-    setTimeout(async () => {
-      try {
-        const response = await axios.get(link)
-        resolve(response)
-      } catch (error) {
-        reject(error)
-      }
-
-    }, time);
   })
 }
 
