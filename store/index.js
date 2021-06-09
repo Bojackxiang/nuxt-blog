@@ -1,12 +1,12 @@
 import axios from 'axios'
-import Vuex from 'vuex'
+import Vuex, { createLogger } from 'vuex'
 
 const initialState = {
   posts: [],
   loading: false,
 }
 
-
+console.log('🚀 DEVELOPMENT MODE: ',process.env.development);
 const createStore = () => {
 
   return new Vuex.Store({
@@ -17,11 +17,10 @@ const createStore = () => {
         // REVIEW 这个是一定会被 updated 的
         // REVIEW 这个是页面渲染之前会做的处理，所以说，在跑完之前 页面会一直等待
         commit('TOGGLE_LOADING')
-        console.log('TOGGLE_LOADING, --- finished');
         console.log('nuxtServerInit'.toUpperCase());
 
         const response = await delayRequest('https://jsonplaceholder.typicode.com/todos/1', 0)
-        
+
         const { data } = response;
 
         const post = {
@@ -36,42 +35,41 @@ const createStore = () => {
 
       },
       setPosts(context, posts) {
-        console.log('ACTION');
         context.commit('setPosts', posts)
       },
-      TOGGLE_LOADING({commit}){
+      TOGGLE_LOADING({ commit }) {
         commit('TOGGLE_LOADING')
       }
     },
     mutations: {
       setPosts(state, posts) {
-        console.log('MUTATION');
         state.posts = posts;
       },
-      TOGGLE_LOADING(state){
-        console.log('toggle loading ', state.loading);
+      TOGGLE_LOADING(state) {
         state.loading = !state.loading
       }
     },
     getters: {
       post(state) {
-        console.log('GETTERS');
         return state.posts[0];
       }
     },
+    plugins: [
+      process.env.development === 'DEV' ? createLogger() : null,
+    ]
   })
 }
 
 const delayRequest = (link, time) => {
-  return new Promise((resolve, reject)=>{
+  return new Promise((resolve, reject) => {
     setTimeout(async () => {
       try {
-        const response = await axios.get(link)  
+        const response = await axios.get(link)
         resolve(response)
       } catch (error) {
         reject(error)
       }
-      
+
     }, time);
   })
 }
