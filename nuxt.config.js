@@ -28,6 +28,7 @@ export default {
     '@/plugins/element-ui',
     '~/plugins/axios',
     '~plugins/core-components.js',
+    '~plugins/string-filter.js',
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

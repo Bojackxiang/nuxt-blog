@@ -1,13 +1,11 @@
 <template>
   <div>
     create a new post
-    <AppButton @click="createNewPost">create a new</AppButton>
+    <AppButton @click="createNewPost">{{'create a new' | upperFilter}} </AppButton>
   </div>
 </template>
 
 <script>
-import DelayRequest from "../../utils/formUtils";
-
 export default {
   methods: {
     async createNewPost() {
