@@ -20,6 +20,7 @@ export default {
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
     'element-ui/lib/theme-chalk/index.css',
+    '~/assets/styles/main.css'
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
@@ -48,4 +49,16 @@ export default {
   build: {
     transpile: [/^element-ui/],
   },
+  // 环境变量
+  env: {
+    development: 'DEV'
+  },
+  // 页面跳转的动画效果
+  transition: {
+    name: 'page',
+    mode: 'out-in'
+  }
+
+
+
 }
