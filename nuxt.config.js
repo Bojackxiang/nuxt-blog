@@ -1,3 +1,5 @@
+const bodyParser = require('body-parser');
+
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
@@ -29,6 +31,7 @@ export default {
     '~/plugins/axios',
     '~plugins/core-components.js',
     '~plugins/string-filter.js',
+    { src: '~/plugins/vuex-persist', ssr: false }
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -45,6 +48,7 @@ export default {
   ],
   axios: {
     // proxyHeaders: false
+    credential: false,
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
@@ -53,13 +57,23 @@ export default {
   },
   // 环境变量
   env: {
-    development: 'DEV'
+    
   },
   // 页面跳转的动画效果
   transition: {
     name: 'page',
     mode: 'out-in'
-  }
+  },
+
+  // api 中的 middlewares 是在这边设置的
+  serverMiddleware: [
+    'redirect-ssl',
+    {
+      path: '/api',
+      handler: '~/api/track-data.js'
+    }
+    
+  ]
 
 
 
